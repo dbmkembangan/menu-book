@@ -216,6 +216,7 @@ function updateCartUI() {
     
     if (cart.length === 0) {
         cartItemsEl.innerHTML = '<p>Your cart is empty.</p>';
+        updateCartTotal();
         return;
     }
     

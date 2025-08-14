@@ -149,6 +149,7 @@ let cart = [];
 const productListEl = document.getElementById('product-list');
 const productModalEl = document.getElementById('product-modal');
 const productDetailsEl = document.getElementById('product-details');
+const thankYouModalEl = document.getElementById('thank-you-modal');
 const cartIconEl = document.querySelector('.cart-icon');
 const cartCountEl = document.getElementById('cart-count');
 const productCatalogEl = document.getElementById('product-catalog');
@@ -164,8 +165,9 @@ const backToCartBtn = document.getElementById('back-to-cart');
 const placeOrderBtn = document.getElementById('place-order');
 const orderFormEl = document.getElementById('order-form');
 
-// Bootstrap modal instance
+// Bootstrap modal instances
 let bootstrapModal;
+let thankYouModal;
 
 // Format price to IDR
 function formatPrice(price) {
@@ -176,8 +178,9 @@ function formatPrice(price) {
 function init() {
     renderProducts();
     setupEventListeners();
-    // Initialize Bootstrap modal
+    // Initialize Bootstrap modals
     bootstrapModal = new bootstrap.Modal(productModalEl);
+    thankYouModal = new bootstrap.Modal(thankYouModalEl);
 }
 
 // Render product catalog organized by categories
@@ -512,6 +515,9 @@ function handleOrderSubmit(e) {
     // Open WhatsApp with pre-filled message
     const whatsappUrl = `https://wa.me/62895332782122?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+    
+    // Show thank you modal
+    thankYouModal.show();
     
     // Reset cart and form
     cart = [];

@@ -3,51 +3,144 @@
  * This file handles all the functionality of the food ordering application
  */
 
-// Product data (in a real app, this would come from a backend API)
-const products = [
-    {
-        id: 1,
-        name: "Nasi Goreng Special",
-        price: 45000,
-        description: "Indonesian fried rice with chicken, shrimp, and vegetables, served with a fried egg on top.",
-        image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Nasi+Goreng"
-    },
-    {
-        id: 2,
-        name: "Ayam Bakar",
-        price: 55000,
-        description: "Grilled chicken marinated in sweet soy sauce and spices, served with rice and sambal.",
-        image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Ayam+Bakar"
-    },
-    {
-        id: 3,
-        name: "Sate Ayam",
-        price: 35000,
-        description: "Chicken skewers grilled to perfection, served with peanut sauce and rice cakes.",
-        image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Sate+Ayam"
-    },
-    {
-        id: 4,
-        name: "Gado-Gado",
-        price: 30000,
-        description: "Indonesian salad with vegetables, eggs, and tofu, topped with peanut sauce.",
-        image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Gado-Gado"
-    },
-    {
-        id: 5,
-        name: "Soto Ayam",
-        price: 40000,
-        description: "Chicken soup with vermicelli noodles, shredded chicken, and boiled egg.",
-        image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Soto+Ayam"
-    },
-    {
-        id: 6,
-        name: "Rendang",
-        price: 65000,
-        description: "Slow-cooked beef in coconut milk and spices, one of Indonesia's most famous dishes.",
-        image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Rendang"
-    }
-];
+// Product data organized by categories (in a real app, this would come from a backend API)
+const productCategories = {
+    "Main Dishes": [
+        {
+            id: 1,
+            name: "Nasi Goreng Special",
+            price: 45000,
+            description: "Indonesian fried rice with chicken, shrimp, and vegetables, served with a fried egg on top.",
+            image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Nasi+Goreng"
+        },
+        {
+            id: 2,
+            name: "Ayam Bakar",
+            price: 55000,
+            description: "Grilled chicken marinated in sweet soy sauce and spices, served with rice and sambal.",
+            image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Ayam+Bakar"
+        },
+        {
+            id: 3,
+            name: "Sate Ayam",
+            price: 35000,
+            description: "Chicken skewers grilled to perfection, served with peanut sauce and rice cakes.",
+            image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Sate+Ayam"
+        },
+        {
+            id: 4,
+            name: "Gado-Gado",
+            price: 30000,
+            description: "Indonesian salad with vegetables, eggs, and tofu, topped with peanut sauce.",
+            image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Gado-Gado"
+        },
+        {
+            id: 5,
+            name: "Soto Ayam",
+            price: 40000,
+            description: "Chicken soup with vermicelli noodles, shredded chicken, and boiled egg.",
+            image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Soto+Ayam"
+        },
+        {
+            id: 6,
+            name: "Rendang",
+            price: 65000,
+            description: "Slow-cooked beef in coconut milk and spices, one of Indonesia's most famous dishes.",
+            image: "https://placehold.co/600x400/cb2f1a/ffffff?text=Rendang"
+        }
+    ],
+    "Drinks": [
+        {
+            id: 7,
+            name: "Es Teh Manis",
+            price: 8000,
+            description: "Traditional Indonesian sweet iced tea, refreshing and perfect for hot weather.",
+            image: "https://placehold.co/600x400/2196F3/ffffff?text=Es+Teh+Manis"
+        },
+        {
+            id: 8,
+            name: "Es Jeruk",
+            price: 12000,
+            description: "Fresh orange juice with ice, sweet and tangy citrus refreshment.",
+            image: "https://placehold.co/600x400/FF9800/ffffff?text=Es+Jeruk"
+        },
+        {
+            id: 9,
+            name: "Es Kelapa Muda",
+            price: 15000,
+            description: "Young coconut water with tender coconut meat, naturally refreshing.",
+            image: "https://placehold.co/600x400/4CAF50/ffffff?text=Es+Kelapa"
+        },
+        {
+            id: 10,
+            name: "Kopi Tubruk",
+            price: 10000,
+            description: "Traditional Indonesian black coffee, strong and aromatic.",
+            image: "https://placehold.co/600x400/795548/ffffff?text=Kopi+Tubruk"
+        },
+        {
+            id: 11,
+            name: "Es Cendol",
+            price: 18000,
+            description: "Traditional drink with green rice flour jelly, coconut milk, and palm sugar.",
+            image: "https://placehold.co/600x400/8BC34A/ffffff?text=Es+Cendol"
+        },
+        {
+            id: 12,
+            name: "Jus Alpukat",
+            price: 20000,
+            description: "Creamy avocado juice with milk and chocolate syrup, rich and nutritious.",
+            image: "https://placehold.co/600x400/689F38/ffffff?text=Jus+Alpukat"
+        }
+    ],
+    "Desserts": [
+        {
+            id: 13,
+            name: "Es Krim Goreng",
+            price: 25000,
+            description: "Fried ice cream with crispy coating, served warm outside and cold inside.",
+            image: "https://placehold.co/600x400/E91E63/ffffff?text=Es+Krim+Goreng"
+        },
+        {
+            id: 14,
+            name: "Pisang Goreng",
+            price: 15000,
+            description: "Deep-fried banana fritters with crispy batter, served with palm sugar syrup.",
+            image: "https://placehold.co/600x400/FFC107/ffffff?text=Pisang+Goreng"
+        },
+        {
+            id: 15,
+            name: "Klepon",
+            price: 12000,
+            description: "Traditional green rice balls filled with palm sugar and coated with grated coconut.",
+            image: "https://placehold.co/600x400/4CAF50/ffffff?text=Klepon"
+        },
+        {
+            id: 16,
+            name: "Dadar Gulung",
+            price: 18000,
+            description: "Green pancake rolls filled with sweet grated coconut and palm sugar.",
+            image: "https://placehold.co/600x400/8BC34A/ffffff?text=Dadar+Gulung"
+        },
+        {
+            id: 17,
+            name: "Es Campur",
+            price: 22000,
+            description: "Mixed ice dessert with various jellies, fruits, and sweet syrup.",
+            image: "https://placehold.co/600x400/9C27B0/ffffff?text=Es+Campur"
+        },
+        {
+            id: 18,
+            name: "Puding Roti",
+            price: 20000,
+            description: "Bread pudding with caramel sauce, soft and sweet comfort dessert.",
+            image: "https://placehold.co/600x400/FF5722/ffffff?text=Puding+Roti"
+        }
+    ]
+};
+
+// Flatten all products for easy access by ID
+const products = Object.values(productCategories).flat();
 
 // Shopping cart array
 let cart = [];
@@ -87,25 +180,62 @@ function init() {
     bootstrapModal = new bootstrap.Modal(productModalEl);
 }
 
-// Render product catalog
+// Render product catalog organized by categories
 function renderProducts() {
     productListEl.innerHTML = '';
     
-    products.forEach(product => {
-        const productCol = document.createElement('div');
-        productCol.className = 'col-lg-4 col-md-6 mb-4';
+    Object.entries(productCategories).forEach(([categoryName, categoryProducts]) => {
+        // Create category section
+        const categorySection = document.createElement('div');
+        categorySection.className = 'category-section mb-5';
         
-        productCol.innerHTML = `
-            <div class="product-card" data-id="${product.id}">
-                <img src="${product.image}" alt="${product.name}" class="product-image">
-                <h3 class="product-title">${product.name}</h3>
-                <p class="product-price">${formatPrice(product.price)}</p>
-                <button class="btn btn-primary view-details">View Details</button>
+        // Category header
+        const categoryHeader = document.createElement('div');
+        categoryHeader.className = 'row mb-4';
+        categoryHeader.innerHTML = `
+            <div class="col-12">
+                <h3 class="category-title text-center mb-0">
+                    <i class="fas ${getCategoryIcon(categoryName)}"></i>
+                    ${categoryName}
+                </h3>
+                <hr class="category-divider">
             </div>
         `;
+        categorySection.appendChild(categoryHeader);
         
-        productListEl.appendChild(productCol);
+        // Products row
+        const productsRow = document.createElement('div');
+        productsRow.className = 'row';
+        
+        categoryProducts.forEach(product => {
+            const productCol = document.createElement('div');
+            productCol.className = 'col-lg-4 col-md-6 mb-4';
+            
+            productCol.innerHTML = `
+                <div class="product-card" data-id="${product.id}">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <h4 class="product-title">${product.name}</h4>
+                    <p class="product-price">${formatPrice(product.price)}</p>
+                    <button class="btn btn-primary view-details">View Details</button>
+                </div>
+            `;
+            
+            productsRow.appendChild(productCol);
+        });
+        
+        categorySection.appendChild(productsRow);
+        productListEl.appendChild(categorySection);
     });
+}
+
+// Get category icon based on category name
+function getCategoryIcon(categoryName) {
+    const icons = {
+        'Main Dishes': 'fa-utensils',
+        'Drinks': 'fa-glass-water',
+        'Desserts': 'fa-ice-cream'
+    };
+    return icons[categoryName] || 'fa-utensils';
 }
 
 // Setup event listeners

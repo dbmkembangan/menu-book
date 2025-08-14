@@ -218,3 +218,44 @@ body {
         margin-bottom: 20px;
     }
 }
+
+/* Category Section Styles */
+.category-section {
+    margin-bottom: 50px;
+}
+
+.category-title {
+    color: #cb2f1a;
+    font-weight: 600;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.category-title i {
+    margin-right: 15px;
+    font-size: 2rem;
+}
+
+.category-divider {
+    border: none;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #cb2f1a, transparent);
+    margin: 20px auto;
+    width: 200px;
+}
+
+/* Responsive adjustments for categories */
+@media (max-width: 768px) {
+    .category-title {
+        font-size: 1.8rem;
+    }
+    
+    .category-title i {
+        font-size: 1.6rem;
+        margin-right: 10px;
+    }
+    
+    .category-divider {
+        width: 150px;
+    }
+}

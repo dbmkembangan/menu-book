@@ -369,6 +369,7 @@ function handleOrderSubmit(e) {
     const name = document.getElementById('name').value;
     const address = document.getElementById('address').value;
     const phone = document.getElementById('phone').value;
+    const notes = document.getElementById('notes').value;
     
     if (!name || !address || !phone) {
         alert('Please fill in all required fields.');
@@ -376,7 +377,7 @@ function handleOrderSubmit(e) {
     }
     
     // Create WhatsApp message
-    const message = createWhatsAppMessage(name, address, phone);
+    const message = createWhatsAppMessage(name, address, phone, notes);
     
     // Open WhatsApp with pre-filled message
     const whatsappUrl = `https://wa.me/62895332782122?text=${encodeURIComponent(message)}`;
@@ -390,7 +391,7 @@ function handleOrderSubmit(e) {
 }
 
 // Create WhatsApp message
-function createWhatsAppMessage(name, address, phone) {
+function createWhatsAppMessage(name, address, phone, notes) {
     let message = `*New Order*\n\n`;
     message += `*Customer Details*\n`;
     message += `Name: ${name}\n`;
@@ -406,6 +407,11 @@ function createWhatsAppMessage(name, address, phone) {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
     message += `\n*Total: ${formatPrice(total)}*`;
+    
+    // Add notes if provided
+    if (notes && notes.trim()) {
+        message += `\n\n*Order Notes*\n${notes.trim()}`;
+    }
     
     return message;
 }

@@ -164,10 +164,14 @@ const orderTotalEl = document.getElementById('order-total');
 const backToCartBtn = document.getElementById('back-to-cart');
 const placeOrderBtn = document.getElementById('place-order');
 const orderFormEl = document.getElementById('order-form');
+const categoryFilterBtns = document.querySelectorAll('.category-filter');
 
 // Bootstrap modal instances
 let bootstrapModal;
 let thankYouModal;
+
+// Current category filter
+let currentFilter = 'all';
 
 // Format price to IDR
 function formatPrice(price) {
@@ -187,7 +191,22 @@ function init() {
 function renderProducts() {
     productListEl.innerHTML = '';
     
-    Object.entries(productCategories).forEach(([categoryName, categoryProducts]) => {
+    // Category filter mapping
+    const categoryFilterMap = {
+        'all': null,
+        'main-dishes': 'Main Dishes',
+        'drinks': 'Drinks',
+        'desserts': 'Desserts'
+    };
+    
+    // Filter categories based on current filter
+    const filteredCategories = currentFilter === 'all' 
+        ? Object.entries(productCategories)
+        : Object.entries(productCategories).filter(([categoryName]) => 
+            categoryName === categoryFilterMap[currentFilter]
+        );
+    
+    filteredCategories.forEach(([categoryName, categoryProducts]) => {
         // Create category section
         const categorySection = document.createElement('div');
         categorySection.className = 'category-section mb-5';
@@ -261,6 +280,11 @@ function setupEventListeners() {
     // Place order button
     orderFormEl.addEventListener('submit', handleOrderSubmit);
     
+    // Category filter buttons
+    categoryFilterBtns.forEach(btn => {
+        btn.addEventListener('click', handleCategoryFilter);
+    });
+    
     // Sticky header scroll effect
     window.addEventListener('scroll', handleHeaderScroll);
 }
@@ -275,6 +299,21 @@ function handleHeaderScroll() {
     } else {
         header.classList.remove('scrolled');
     }
+}
+
+// Handle category filter
+function handleCategoryFilter(e) {
+    const selectedCategory = e.target.dataset.category;
+    
+    // Update active button
+    categoryFilterBtns.forEach(btn => btn.classList.remove('active'));
+    e.target.classList.add('active');
+    
+    // Update current filter
+    currentFilter = selectedCategory;
+    
+    // Re-render products with filter
+    renderProducts();
 }
 
 // Handle product click
